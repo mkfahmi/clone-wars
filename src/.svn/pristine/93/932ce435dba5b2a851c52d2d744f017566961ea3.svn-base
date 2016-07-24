@@ -1,6 +1,0 @@
-// Personnages ne possédant pas la force
-abstract class NoForceCharacter extends Character {
-    public void armedAttack(Character ennemy) {
-        ennemy.hp -= intelligence - ennemy.def;
-    }
-}

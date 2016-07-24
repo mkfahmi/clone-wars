@@ -1,6 +1,0 @@
-// Personnages possédant la force
-abstract class ForceCharacter extends Character {
-    public void forceAttack(Character ennemy) {
-        ennemy.hp -= (force / 10) * 2;
-    }
-}

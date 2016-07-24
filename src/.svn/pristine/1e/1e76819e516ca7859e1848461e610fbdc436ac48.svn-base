@@ -1,0 +1,9 @@
+public class Main {
+    public static void main(String[] args) {
+
+        
+    	Usine usine = new Usine();
+        Character unite = usine.formerUnite(TypeUnite.DROID);
+        System.out.println(unite);
+    }
+}

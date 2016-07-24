@@ -1,0 +1,16 @@
+// Classe usine qui représente un bâtiment capable de construire des unités.
+public class Usine 
+{
+    private EnemyFactory enemyFactory;// Attribut contenant la enemyFactory simple.
+     
+    // Le constructeur permet de sélectionner la enemyFactory à utiliser.
+    public Usine() {
+        this.enemyFactory = new EnemyFactory();
+    }
+     
+    // Méthode qui permet de construire l'ensemble des unités.
+    public Enemy buildUnit(EnemyTypes type) {
+        Enemy unit = this.enemyFactory.createUnit(type);
+        return unit;
+    }
+}

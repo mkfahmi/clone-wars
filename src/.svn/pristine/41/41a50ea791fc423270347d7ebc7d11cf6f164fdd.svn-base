@@ -1,0 +1,33 @@
+abstract class Character {
+
+    protected String type;
+    protected int hp;
+    protected int def;
+    protected int power;
+    protected int force;
+    protected int intelligence;
+    protected int lvl;
+
+    public Character() {
+    }
+
+    public int physicalAttack(Enemy enemy) {
+        int lost = power - enemy.def;
+
+        if(lost > enemy.hp)
+            lost = enemy.hp;
+
+        if(lost > 0) {
+            enemy.hp -= lost;
+            System.out.println(enemy.type + " a perdu " + lost + " hp.");
+        } else {
+            System.out.println(enemy.type + " n'a perdu aucun hp.");
+        }
+
+        return enemy.hp;
+    }
+
+    public String toString() {
+    	return ("hp : " + hp + "\ndef : " + def + "\npower : " + power + "\nforce : " + force + "\nintelligence : " + intelligence + "\nlvl : " + lvl);
+    }
+}

@@ -1,0 +1,90 @@
+import java.util.Arrays;
+
+public class Player extends Character {
+
+    //Le singleton
+    private static Player single;
+
+    private String playerName;
+    private int xp;
+    private int xpMax;
+    private int hpMax;
+	private String[] characterClass = new String[] {"Jedi","Sith","BountyHunters","ImperialAgent", "Mercenary", "Jawa"};
+
+
+	// Calcul xp gagné
+	// (((mobXp*mobLvl)/5)*(((2*mobLvl+10)^2.5)/((MobLvl*lvl+10)^2.5))+1)
+	// See also:
+	// http://bulbapedia.bulbagarden.net/wiki/Experience
+	// http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_effort_value_yield
+
+    // Constructeur en private pour faire le singleton
+	private Player(Classes type, String playerName) {
+
+		lvl = 1;
+		xp = 0;
+		Character unite = null;
+		
+		switch(type)
+        {
+            case JEDI:
+            	unite = new Jedi();
+            	break;
+
+            case SITH:
+            	unite = new Sith();
+            	break;
+
+            case BOUNTYHUNTER:
+            	unite = new BountyHunter();
+            	break;
+
+            case IMPERIALAGENT:
+        		unite = new ImperialAgent();
+        		break;
+
+            case MERCENARY:
+            	unite = new Mercenary();
+        		break;
+
+            case JAWA:
+            	unite = new Jawa();
+        		break;
+        }
+	}
+	
+	public void levelup() {
+        this.lvl += 1;
+        this.xpMax = (int) (4 * Math.pow(lvl, 3)) / 5;
+        this.hpMax *= 1.5;
+        this.hp = hpMax;
+        this.def *= 1.5;
+        this.power *= 1.5;
+        this.force *= 1.5;
+        this.intelligence *= 1.5;
+    }
+
+    //Méthode d'accès au singleton
+    public static Player getInstance(Classes playerClass, String playerName){
+        if(single == null)
+            single = new Player(playerClass, playerName);
+
+        return single;
+    }
+	
+	// SETTERS
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	
+	// GETTERS
+	public int getHp() {
+		return this.hp;
+	}
+	public int getLvl() {
+		return this.lvl;
+	}
+
+    // Méthodes héritées de Character
+
+}

@@ -1,0 +1,31 @@
+abstract class Character {
+
+    protected int hp;
+    protected int def;
+    protected int power;
+    protected int force;
+    protected int intelligence;
+    protected int lvl;
+    protected int xp;
+    private int xpMax;
+    private int hpMax;
+
+    public Character() {
+    }
+
+    public void physicalAttack(Character ennemy) {
+        ennemy.hp -= power - ennemy.def;
+    }
+
+    public void levelup() {
+        lvl += 1;
+        xpMax = (int) (4 * Math.pow(lvl, 3)) / 5;
+        hpMax *= 1.5;
+        hp = hpMax;
+        def *= 1.5;
+        power *= 1.5;
+        force *= 1.5;
+        intelligence *= 1.5;
+    }
+
+}

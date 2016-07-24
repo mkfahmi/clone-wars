@@ -1,0 +1,18 @@
+// Classe usine qui représente un bâtiment capable de construire des unités.
+public class Usine 
+{
+    private Fabrique fabrique;// Attribut contenant la fabrique simple.
+     
+    // Le constructeur permet de sélectionner la fabrique à utiliser.
+    public Usine()
+    {
+        this.fabrique = new Fabrique();
+    }
+     
+    // Méthode qui permet de construire l'ensemble des unités.
+    public Character formerUnite(TypeUnite type)
+    {
+        Character unite = this.fabrique.creerUnite(type);
+        return unite;
+    }
+}

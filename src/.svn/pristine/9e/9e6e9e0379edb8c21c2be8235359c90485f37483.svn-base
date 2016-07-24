@@ -1,0 +1,21 @@
+public class EnemyFactory {
+	public Enemy createUnit(EnemyTypes type)
+    {
+        Enemy unit = null;
+        switch(type)
+        {
+            case DROID:
+            	unit = new Droid();
+            	break;
+            	
+            case CLONE:
+            	unit = new Clone();
+            	break;
+            	
+            case SOLDAT:
+            	unit = new Soldat();
+            	break;
+        }
+        return unit;
+    }
+}

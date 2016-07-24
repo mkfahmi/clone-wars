@@ -1,0 +1,20 @@
+public class Room {
+
+    private int lvl;
+
+    public Room(int lvl) {
+
+    }
+
+    public Enemy generateEnemies() {
+
+        Usine usine = new Usine();
+        Enemy unit = usine.buildUnit(EnemyTypes.randomEnemy());
+
+        System.out.println(unit.type);
+        System.out.println(unit);
+
+        return unit;
+    }
+
+}

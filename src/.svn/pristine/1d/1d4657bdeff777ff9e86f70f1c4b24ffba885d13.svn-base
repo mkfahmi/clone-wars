@@ -1,0 +1,176 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.lang.reflect.Method;
+
+public class Player extends Character {
+
+    //Le singleton
+    private static Player single;
+
+    public Character unit;
+    private String name;
+    private int xp;
+    private int xpMax;
+    private int hpMax;
+
+    // Calcul xp gagné
+	// (((mobXp*mobLvl)/5)*(((2*mobLvl+10)^2.5)/((MobLvl*lvl+10)^2.5))+1)
+	// See also:
+	// http://bulbapedia.bulbagarden.net/wiki/Experience
+	// http://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_effort_value_yield
+
+    // Constructeur en private pour faire le singleton
+    private Player() {
+
+    }
+
+	private Player(HeroTypes playerClass) {
+
+        super();
+		lvl = 1;
+        xp = 0;
+
+		/*switch(playerClass) {
+            case JEDI:
+            	unit = new Jedi();
+            	break;
+            case SITH:
+            	unit = new Sith();
+            	break;
+            case BOUNTYHUNTER:
+            	unit = new BountyHunter();
+            	break;
+            case IMPERIALAGENT:
+        		unit = new ImperialAgent();
+        		break;
+            case MERCENARY:
+            	unit = new Mercenary();
+        		break;
+            case JAWA:
+            	unit = new Jawa();
+        		break;
+        }*/
+
+	}
+	
+	public void levelup() {
+        this.lvl += 1;
+        this.xpMax = (int) (4 * Math.pow(lvl, 3)) / 5;
+        this.hpMax *= 1.5;
+        this.hp = hpMax;
+        this.def *= 1.5;
+        this.power *= 1.5;
+        this.force *= 1.5;
+        this.intelligence *= 1.5;
+    }
+
+    public void gameName(BufferedReader in) throws IOException {
+        // Choix du nom
+        System.out.println();
+        System.out.println("Quel est votre nom, guerrier ?");
+        System.out.print("$> ");
+        name = in.readLine();
+        System.out.println();
+    }
+
+    public void gameType(BufferedReader in) throws IOException {
+        // Choix du personnage
+        String character;
+
+        while(true) {
+
+            System.out.println("Choisissez votre classe :");
+            System.out.println("1- Jedi\n2- Sith\n3- Bounty Hunter \n4- Imperial Agent\n5- Mercenary\n6- Jawa");
+            System.out.println();
+            System.out.print("$> ");
+            character = in.readLine();
+            System.out.println();
+
+            switch(character) {
+                case "1":
+                    unit = new Jedi();
+                    break;
+                case "2" :
+                    unit = new Sith();
+                    break;
+                case "3" :
+                    unit = new BountyHunter();
+                    break;
+                case "4" :
+                    unit = new ImperialAgent();
+                    break;
+                case "5" :
+                    unit = new Mercenary();
+                    break;
+                case "6" :
+                    unit = new Jawa();
+                    break;
+                case "exit":
+                    return;
+            }
+            break;
+        }
+
+        System.out.println("Bienvenue à toi, " + unit.type + " " + name + ".");
+    }
+
+    public void gameAttack(BufferedReader in, Enemy enemy) throws IOException {
+
+        String attack;
+
+        System.out.println("Tu es face à un " + enemy.type + " de niveau " + enemy.lvl + ".");
+
+        while(enemy.hp > 0) {
+            System.out.print("À l'attaque ! (");
+
+            Method methodsArray[] = unit.getClass().getMethods();
+
+            System.out.println("1- " + methodsArray[1].getName() + "; 2- " + methodsArray[2].getName() + ")");
+            System.out.print("$> ");
+            attack = in.readLine();
+            switch(attack) {
+                case "1":
+                    methodsArray[1].invoke();
+                    break;
+                case "2":
+                    unit.getClass().getClasses();
+                    break;
+            }
+            System.out.println();
+        }
+
+    }
+
+
+
+    // Méthode d'accès au singleton
+    public static Player getInstance(){
+        if(single == null)
+            single = new Player();
+
+        return single;
+    }
+
+    public static Player getInstance(HeroTypes playerClass){
+        if(single == null)
+            single = new Player(playerClass);
+
+        return single;
+    }
+	
+	// SETTERS
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	
+	// GETTERS
+    public String getName() {
+        return this.name;
+    }
+	public int getHp() {
+		return this.hp;
+	}
+	public int getLvl() {
+		return this.lvl;
+	}
+}

@@ -1,0 +1,20 @@
+abstract class Character {
+
+    protected int hp;
+    protected int def;
+    protected int power;
+    protected int force;
+    protected int intelligence;
+    protected int lvl;
+
+    public Character() {
+    }
+
+    public void physicalAttack(Character ennemy) {
+        ennemy.hp -= power - ennemy.def;
+    }
+
+    public String toString() {
+    	return ("hp : " + hp + "\ndef : " + def + "\npower : " + power + "\nforce : " + force + "\nintelligence : " + intelligence + "\nlvl : " + lvl);
+    }
+}
